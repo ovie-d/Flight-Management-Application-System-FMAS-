@@ -10,9 +10,32 @@ Flight::Flight(string flightNumber, string departureCity, string arrivalCity, in
     : flightNumber(flightNumber), departureCity(departureCity), arrivalCity(arrivalCity),
       number_of_rows(number_of_rows), number_of_seats_per_row(number_of_seats_per_row) {
 
+    if (flightNumber.empty()) {
+        cout << "Error: Flight number cannot be empty." << endl;
+    }
 
+    if (departureCity.empty()) {
+        cout << "Error: Departure city cannot be empty." << endl;
+    }
 
+    if (arrivalCity.empty()) {
+        cout << "Error: Arrival city cannot be empty." << endl; 
+    }
+
+    if (number_of_rows <= 0) {
+        cout << "Error: Number of rows must be a positive integer." << endl;
+    }
+
+    if (number_of_seats_per_row <= 0) {
+        cout << "Error: Number of seats per row must be a positive integer." << endl;
+    }
+
+    if (number_of_seats_per_row > 24) {
+        cout << "Error: Number of seats per row cannot exceed 24." << endl;
       }
+    if (number_of_rows > 6) {
+        cout << "Error: Number of rows cannot exceed 6." << endl;
+    }
 
 // getters
 string Flight::get_flightNumber() const {
