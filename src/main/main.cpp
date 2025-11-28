@@ -22,8 +22,10 @@ void select(){
 
     std::cout << "\nEnter your choice (1-7) : " << std::endl;
 
+    // input
     char choice = std::cin.get();
 
+    // switch to handle input
     switch (choice)
     {
     case '1':
