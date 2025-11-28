@@ -3,7 +3,7 @@
 bool quit = false;
 
 int cont(){
-    std::cout << "<<<<Press Return to continue>>>>" << std::endl;
+    std::cout << "<<<<Press any key to continue>>>>" << std::endl;
     if (std::cin.get() == '\n') {
         return 1;
     }
@@ -21,7 +21,7 @@ void select(){
     std::cout << "  7. Quit." << std::endl;
 
     std::cout << "\nEnter your choice (1-7) : " << std::endl;
-    
+
     char choice = std::cin.get();
 
     switch (choice)
