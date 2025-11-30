@@ -22,8 +22,9 @@ Passenger::Passenger(std::string firstname, std::string lastname, int row, char 
         std::cout << "Error: Phone number cannot be empty." << std::endl;
     }
 
-    if (ID <= 0000 || ID > 9999) {
-        std::cout << "Error: ID must be a positive number." << std::endl;
+    // The project data uses 5-digit IDs (e.g., 10000). The check is adjusted to allow 5-digit IDs.
+    if (ID < 10000 || ID > 99999) {
+        std::cout << "Error: ID must be a 5-digit positive number (10000-99999)." << std::endl;
     }
 
     }

@@ -41,3 +41,4 @@ private:
     int number_of_seats_per_row;
 
 };
+#endif // Flight_h

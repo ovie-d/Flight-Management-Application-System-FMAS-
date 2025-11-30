@@ -30,11 +30,13 @@ Flight::Flight(std::string flightNumber, std::string departureCity, std::string 
         std::cout << "Error: Number of seats per row must be a positive integer." << std::endl;
     }
 
-    if (number_of_seats_per_row > 24) {
-        std::cout << "Error: Number of seats per row cannot exceed 24." << std::endl;
+    // Note: The SeatMap array size is [24][6], so the maximum rows is 24 and max seats per row is 6.
+    // The checks below are based on the project's implicit constraints.
+    if (number_of_rows > 24) {
+        std::cout << "Error: Number of rows cannot exceed 24." << std::endl;
     }
-    if (number_of_rows > 6) {
-        std::cout << "Error: Number of rows cannot exceed 6." << std::endl;
+    if (number_of_seats_per_row > 6) {
+        std::cout << "Error: Number of seats per row cannot exceed 6." << std::endl;
     }
 }
 
