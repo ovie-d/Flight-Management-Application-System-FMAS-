@@ -7,7 +7,7 @@
 // Helper function to find a flight by ID
 Flight* findFlightById(std::vector<Flight>& flights, const std::string& flightId) {
     for (auto& flight : flights) {
-        if (flight.id == flightId) {
+        if (flight.get_flightNumber() == flightId) {
             return &flight;
         }
     }
@@ -94,7 +94,7 @@ bool FileManager::loadPassengers(std::vector<Flight>& flights) {
                 }
                 
                 Passenger newPassenger(firstName, lastName, row_num, seat_char, passengerId, phoneNumber);
-                flight->addPassenger(newPassenger);
+                flight->add_passenger(newPassenger);
             }
         }
     }

@@ -44,6 +44,8 @@ void select(){
     // Clear the rest of the line after reading the integer
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
+    std::string flightId; // Moved outside the switch to fix 'jump to case label' error
+
     // Switch to handle input
     switch (choice)
     {
@@ -56,7 +58,6 @@ void select(){
         }
         
         std::cout << "Enter the flight ID to select: ";
-        std::string flightId;
         std::getline(std::cin, flightId);
         
         if (fm.selectFlight(flightId)) {
@@ -69,11 +70,13 @@ void select(){
         break;
     case 2:
         // Display Flight Seat Map (Alex's part)
-        if (fm.getSelectedFlight            // Alex's SeatMap display logic
+        if (fm.getSelectedFlight()) {
+            // Alex's SeatMap display logic
             // NOTE: This requires Flight::getSeatMap to be implemented by David
             // For now, we use a placeholder array to make the call compile.
             int seatMap[24][6] = {0}; // Placeholder for actual seat map data
-            displaySeatMap(fm.getSelectedFlight()->get_flightNumber(), seatMap); else {
+            displaySeatMap(fm.getSelectedFlight()->get_flightNumber(), seatMap);
+        } else {
             std::cout << "Please select a flight first (Option 1).\n";
         }
         break;

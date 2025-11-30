@@ -50,12 +50,11 @@ Flight* FlightManager::getSelectedFlight() {
     return selectedFlight;
 }
 
-// Add a passenger to the currently selected flight
+    // Add a passenger to the currently selected flight
 bool FlightManager::addPassenger(const Passenger& p) {
     if (selectedFlight) {
         // The Flight class (David's part) should handle the actual addition and seat validation
-        selectedFlight->addPassenger(p);
-        return true;
+        return selectedFlight->add_passenger(p);
     }
     return false;
 }
@@ -64,7 +63,7 @@ bool FlightManager::addPassenger(const Passenger& p) {
 bool FlightManager::removePassenger(int passengerId) {
     if (selectedFlight) {
         // The Flight class (David's part) should handle the actual removal
-        return selectedFlight->removePassengerById(passengerId);
+        return selectedFlight->remove_passenger(passengerId);
     }
     return false;
 }
