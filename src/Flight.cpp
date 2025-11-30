@@ -124,10 +124,9 @@ void Flight::print_seat_map() const {
     
     // We need to include SeatMap.h at the top of Flight.cpp
     // The actual display logic is in SeatMap.cpp (Alex's part)
-    // We will update main.cpp to call this function instead of the direct call to displaySeatMap.
-    
-    // For now, we will just print a message to indicate the data is ready.
-    std::cout << "Seat map data generated for flight " << flightNumber << ".\n";
+    // The actual display logic is in SeatMap.cpp (Alex's part)
+    // Call the external display function with the generated map data
+    displaySeatMap(flightNumber, seatMap);
 }
 
 bool Flight::is_seat_taken(int row, char seat) const {
