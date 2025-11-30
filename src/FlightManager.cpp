@@ -1,23 +1,12 @@
-#include "../include/FlightManager.h"
-#include "../include/Flight.h"
-#include "../include/Passenger.h"
+#include "FlightManager.h"
+#include "Flight.h"
+#include "Passenger.h"
 #include <iostream>
 #include <algorithm>
 
-// Initialize static member to nullptr
-FlightManager* instance = nullptr;
-
-// Private constructor
+// Constructor
 FlightManager::FlightManager() : selectedFlight(nullptr) {
     // The FileManager object is a member, so it is automatically constructed.
-}
-
-// Singleton access method
-FlightManager& FlightManager::getInstance() {
-    if (instance == nullptr) {
-        instance = new FlightManager();
-    }
-    return *instance;
 }
 
 // Initialize: Load all data from files
@@ -39,15 +28,15 @@ void FlightManager::listFlights() const {
     std::cout << "Available Flights:\n";
     for (size_t i = 0; i < flights.size(); ++i) {
         const auto& f = flights[i];
-        std::cout << i + 1 << ". " << f.id << " " << f.departure << " to " << f.destination
-                  << " (" << f.rows << " rows, " << f.seatsPerRow << " seats/row)\n";
+        std::cout << i + 1 << ". " << f.get_flightNumber() << " " << f.get_departureCity() << " to " << f.get_arrivalCity()
+                  << " (" << f.get_number_of_rows() << " rows, " << f.get_number_of_seats_per_row() << " seats/row)\n";
     }
 }
 
 // Select a flight by ID
 bool FlightManager::selectFlight(const std::string& flightId) {
     for (auto& f : flights) {
-        if (f.id == flightId) {
+        if (f.get_flightNumber() == flightId) {
             selectedFlight = &f;
             return true;
         }
@@ -83,4 +72,9 @@ bool FlightManager::removePassenger(int passengerId) {
 // Save all data back to files
 bool FlightManager::saveData() {
     return fileManager.saveAllData(flights);
+}
+
+// Provide access to the internal flights vector for main.cpp
+std::vector<Flight>& FlightManager::getFlights() {
+    return flights;
 }

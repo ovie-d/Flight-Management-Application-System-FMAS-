@@ -67,7 +67,33 @@ bool FileManager::loadPassengers(std::vector<Flight>& flights) {
         if (ss >> flightId >> firstName >> lastName >> phoneNumber >> seat >> passengerId) {
             Flight* flight = findFlightById(flights, flightId);
             if (flight) {
-                Passenger newPassenger(flightId, firstName, lastName, phoneNumber, seat, passengerId);
+                // Note: Passenger constructor takes (firstname, lastname, row, seat, ID, PhoneNumber)
+                // We need to extract row and seat from the combined string 'seat' and use the flightId from the Flight object.
+                // Since the Flight and Passenger classes are not fully implemented by David, we will use the simplified constructor
+                // and assume the Flight class will handle the correct assignment.
+                // For now, we will use the simplified constructor that takes the components.
+                // The Passenger constructor in Passenger.h is: Passenger(string firstname, string lastname, int row, char seat, int ID, string PhoneNumber);
+                // The data in passengers.txt is: WJ1145 Tom Harris 403-100-0000 6A 10000
+                // The stream extraction is: flightId, firstName, lastName, phoneNumber, seat, passengerId
+                // We need to parse 'seat' (e.g., "6A") into row (int) and seat (char).
+                
+                // Assuming the first part of 'seat' is the row (int) and the last char is the seat (char)
+                int row_num = 0;
+                char seat_char = ' ';
+                
+                // Simple parsing for course level:
+                if (seat.length() > 1) {
+                    seat_char = seat.back();
+                    std::string row_str = seat.substr(0, seat.length() - 1);
+                    try {
+                        row_num = std::stoi(row_str);
+                    } catch (...) {
+                        // Handle error if conversion fails, but for course level, assume valid input
+                        row_num = 0;
+                    }
+                }
+                
+                Passenger newPassenger(firstName, lastName, row_num, seat_char, passengerId, phoneNumber);
                 flight->addPassenger(newPassenger);
             }
         }
@@ -86,14 +112,15 @@ bool FileManager::saveAllData(const std::vector<Flight>& flights) {
     }
 
     for (const auto& flight : flights) {
-        for (const auto& passenger : flight.passengers) {
+        for (const auto& passenger : flight.get_passengers()) {
             // Format: flightId firstName lastName phoneNumber seat passengerId
-            passengerFile << flight.id << " "
-                          << passenger.firstName << " "
-                          << passenger.lastName << " "
-                          << passenger.phoneNumber << " "
-                          << passenger.seat << " "
-                          << passenger.id << "\n";
+            // We need to use the public getters for all passenger data
+            passengerFile << flight.get_flightNumber() << " "
+                          << passenger.get_Firstname() << " "
+                          << passenger.get_Lastname() << " "
+                          << passenger.get_PhoneNumber() << " "
+                          << passenger.get_seatandrow() << " "
+                          << passenger.get_ID() << "\n";
         }
     }
     passengerFile.close();

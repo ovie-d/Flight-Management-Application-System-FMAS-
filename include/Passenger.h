@@ -2,7 +2,7 @@
 #define Passenger_h 
 
 #include <string>
-using namespace std;
+
 
 
 
@@ -11,34 +11,34 @@ public:
 
     //constructor 
     Passenger();
-    Passenger(string firstname, string lastname, int row, char seat, int ID, string PhoneNumber);
+    Passenger(std::string firstname, std::string lastname, int row, char seat, int ID, std::string PhoneNumber);
 
     // setters
-    void changePassengerDetails(string firstname, string lastname, string PhoneNumber);
-    void changePassengerFirstname(string firstname);
-    void changePassengerLastname(string lastname);  
-    void changePassengerPhoneNumber(string PhoneNumber);
+    void changePassengerDetails(std::string firstname, std::string lastname, std::string PhoneNumber);
+    void changePassengerFirstname(std::string firstname);
+    void changePassengerLastname(std::string lastname);  
+    void changePassengerPhoneNumber(std::string PhoneNumber);
 
     //destructor
     ~Passenger();
  
     // getters 
-    string get_Firstname () const; 
-    string get_Lastname () const;
-    string get_fullname () const;
+    std::string get_Firstname () const; 
+    std::string get_Lastname () const;
+    std::string get_fullname () const;
     char get_seat () const;
     int get_row ()const;
-    string get_seatandrow ()const;
+   std::string get_seatandrow () const;
     int get_ID() const;
-    string get_PhoneNumber() const;
+    std::string get_PhoneNumber() const;
 
 private:
-    string Firstname;
-    string Lastname;
+    std::string Firstname;
+    std::string Lastname;
     int row;
     char seat;
     int ID;
-    string PhoneNumber;
+    std::string PhoneNumber;
 
 
 

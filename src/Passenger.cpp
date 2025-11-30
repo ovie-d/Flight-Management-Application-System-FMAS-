@@ -1,58 +1,58 @@
 #include "Passenger.h"
 #include <iostream>
-using namespace std;
+
 #include <string>
 
 // constructor
 Passenger::Passenger() : Firstname(), Lastname(), row(), seat(), ID(), PhoneNumber() {}
 
-Passenger::Passenger(string firstname, string lastname, int row, char seat, int ID, string PhoneNumber)
+Passenger::Passenger(std::string firstname, std::string lastname, int row, char seat, int ID, std::string PhoneNumber)
     : Firstname(firstname), Lastname(lastname), row(row), seat(seat), ID(ID), PhoneNumber(PhoneNumber) {
 
     if (Firstname.empty()) {
-        cout << "Error: First name cannot be empty." << endl;
+        std::cout << "Error: First name cannot be empty." << std::endl;
     }
 
     if (Lastname.empty()) {
-        cout << "Error: Last name cannot be empty." << endl;
+        std::cout << "Error: Last name cannot be empty." << std::endl;
     }
 
     if (PhoneNumber.empty()) {
-        cout << "Error: Phone number cannot be empty." << endl;
+        std::cout << "Error: Phone number cannot be empty." << std::endl;
     }
 
     if (ID <= 0000 || ID > 9999) {
-        cout << "Error: ID must be a positive number." << endl;
+        std::cout << "Error: ID must be a positive number." << std::endl;
     }
 
     }
 
  // setters
-void Passenger::changePassengerDetails(string firstname, string lastname, string PhoneNumber) {
+void Passenger::changePassengerDetails(std::string firstname, std::string lastname, std::string PhoneNumber) {
     Firstname = firstname;
     Lastname = lastname;
     this->PhoneNumber = PhoneNumber;
 }
 
-void Passenger::changePassengerFirstname(string firstname) {
+void Passenger::changePassengerFirstname(std::string firstname) {
     if (firstname.empty()) {
-        cout << "Error: First name cannot be empty." << endl;
+        std::cout << "Error: First name cannot be empty." << std::endl;
         return;
     }
 
     Firstname = firstname;
 }
 
-void Passenger::changePassengerLastname(string lastname) {
+void Passenger::changePassengerLastname(std::string lastname) {
     if (lastname.empty()) {
-        cout << "Error: Last name cannot be empty." << endl;
+        std::cout << "Error: Last name cannot be empty." << std::endl;
         return;
     }
 
     Lastname = lastname;
 }
 
-void Passenger::changePassengerPhoneNumber(string PhoneNumber) {
+void Passenger::changePassengerPhoneNumber(std::string PhoneNumber) {
     this->PhoneNumber = PhoneNumber;
 }
 
@@ -60,15 +60,15 @@ void Passenger::changePassengerPhoneNumber(string PhoneNumber) {
 Passenger::~Passenger() {}
 
 // getters 
-string Passenger::get_Firstname() const {
+std::string Passenger::get_Firstname() const {
     return Firstname;
 }
 
-string Passenger::get_Lastname() const {
+std::string Passenger::get_Lastname() const {
     return Lastname;
 }
 
-string Passenger::get_fullname() const {
+std::string Passenger::get_fullname() const {
     return Firstname + " " + Lastname;
 }
 char Passenger::get_seat() const {
@@ -79,14 +79,16 @@ int Passenger::get_row() const {
     return row;
 }
 
-string Passenger::get_seatandrow() const {
-    return to_string(row) + seat;
+std::string Passenger::get_seatandrow() const {
+    std::stringstream ss;
+    ss << row << seat;
+    return ss.str();
 }
 
 int Passenger::get_ID() const {
     return ID;
 }
 
-string Passenger::get_PhoneNumber() const {
+std::string Passenger::get_PhoneNumber() const {
     return PhoneNumber;
 }

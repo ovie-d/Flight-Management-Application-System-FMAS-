@@ -2,10 +2,10 @@
 #include <iomanip>
 #include <string>
 
-std::string flights[] = {"FM101", "FM102", "FM103", "FM104", "FM105"};
 
-void displaySeatMap(int flightID, int seatMap[24][6]) {
-    std::cout << "Seat Map for Flight " << flights[flightID] << std::endl;
+
+void displaySeatMap(const std::string& flightId, int seatMap[24][6]) {
+    std::cout << "Aircraft Seat Map for flight " << flightId << std::endl;
 
     std::cout << std::setw(5) << "";
 
@@ -29,16 +29,3 @@ void displaySeatMap(int flightID, int seatMap[24][6]) {
 
 }
 
-int main() {
-    int flightID = 0; // Example flight ID
-    int seatMap[24][6] = {0}; // Example seat map initialization
-
-    // Example: Mark some seats as occupied
-    seatMap[0][0] = 1; // Seat A1 occupied
-    seatMap[2][5] = 1; // Seat C6 occupied
-    seatMap[23][5] = 1; // Seat F24 occupied
-
-    displaySeatMap(flightID, seatMap);
-
-    return 0;
-}

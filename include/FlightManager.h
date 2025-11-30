@@ -5,14 +5,14 @@
 #include <string>
 #include "FileManager.h"
 
-// Forward declarations for classes handled by other team members
+// Forward declarations for classes from other team members
 class Flight;
 class Passenger;
 
 class FlightManager {
 public:
-    // Singleton pattern implementation (since the task division mentions "Ensuring singleton data stores")
-    static FlightManager& getInstance();
+    // Constructor
+    FlightManager();
 
     // Core application logic functions
     void initialize();
@@ -20,20 +20,17 @@ public:
     bool selectFlight(const std::string& flightId);
     Flight* getSelectedFlight();
 
-    // Data manipulation functions (delegated to the selected flight object)
+    // Data manipulation functions
     bool addPassenger(const Passenger& p);
     bool removePassenger(int passengerId);
     
     // Data persistence
     bool saveData();
 
-private:
-    // Private constructor for Singleton
-    FlightManager();
-    // Delete copy constructor and assignment operator for Singleton
-    FlightManager(const FlightManager&) = delete;
-    FlightManager& operator=(const FlightManager&) = delete;
+    // Provide access to the internal flights vector for main.cpp
+    std::vector<Flight>& getFlights();
 
+private:
     // Data members
     std::vector<Flight> flights;
     Flight* selectedFlight;
