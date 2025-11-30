@@ -71,11 +71,8 @@ void select(){
     case 2:
         // Display Flight Seat Map (Alex's part)
         if (fm.getSelectedFlight()) {
-            // Alex's SeatMap display logic
-            // NOTE: This requires Flight::getSeatMap to be implemented by David
-            // For now, we use a placeholder array to make the call compile.
-            int seatMap[24][6] = {0}; // Placeholder for actual seat map data
-            displaySeatMap(fm.getSelectedFlight()->get_flightNumber(), seatMap);
+            // Call the Flight member function to generate and display the map
+            fm.getSelectedFlight()->print_seat_map();
         } else {
             std::cout << "Please select a flight first (Option 1).\n";
         }
@@ -83,8 +80,7 @@ void select(){
     case 3:
         // Display Passengers Information (David's part)
         if (fm.getSelectedFlight()) {
-            // Placeholder for David's Passenger display logic
-            std::cout << "Displaying Passengers for " << fm.getSelectedFlight()->get_flightNumber() << " (Placeholder for David's code).\n";
+            fm.getSelectedFlight()->print_passenger_list();
         } else {
             std::cout << "Please select a flight first (Option 1).\n";
         }
@@ -92,8 +88,54 @@ void select(){
     case 4:
         // Add a New Passenger (David's part, using fm.addPassenger)
         if (fm.getSelectedFlight()) {
-            // Placeholder for David's Add Passenger logic
-            std::cout << "Adding new passenger to " << fm.getSelectedFlight()->get_flightNumber() << " (Placeholder for David's code).\n";
+            
+            // --- Implementation of Add Passenger Logic ---
+            std::string firstName, lastName, phoneNumber, seatAndRowStr;
+            int id, row;
+            char seat;
+            
+            std::cout << "Enter Passenger First Name: ";
+            std::getline(std::cin, firstName);
+            std::cout << "Enter Passenger Last Name: ";
+            std::getline(std::cin, lastName);
+            std::cout << "Enter Passenger Phone Number: ";
+            std::getline(std::cin, phoneNumber);
+            std::cout << "Enter Passenger ID (5-digit): ";
+            
+            // Read ID and handle input failure
+            if (!(std::cin >> id)) {
+                std::cout << "Invalid ID entered. Returning to menu.\n";
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                break;
+            }
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear buffer
+            
+            std::cout << "Enter Seat (e.g., 12C): ";
+            std::getline(std::cin, seatAndRowStr);
+            
+            // Parse seatAndRowStr into row (int) and seat (char)
+            if (seatAndRowStr.length() > 1) {
+                seat = seatAndRowStr.back();
+                std::string row_str = seatAndRowStr.substr(0, seatAndRowStr.length() - 1);
+                try {
+                    // Use simple string to integer conversion
+                    row = std::stoi(row_str);
+                } catch (...) {
+                    row = 0; // Invalid row
+                }
+            } else {
+                row = 0;
+                seat = ' ';
+            }
+            
+            // Create a temporary Passenger object
+            Passenger newPassenger(firstName, lastName, row, seat, id, phoneNumber);
+            
+            // Call FlightManager to add the passenger
+            fm.addPassenger(newPassenger);
+            // --- End of Add Passenger Logic ---
+            
         } else {
             std::cout << "Please select a flight first (Option 1).\n";
         }
@@ -101,8 +143,27 @@ void select(){
     case 5:
         // Remove an Existing Passenger (David's part, using fm.removePassenger)
         if (fm.getSelectedFlight()) {
-            // Placeholder for David's Remove Passenger logic
-            std::cout << "Removing passenger from " << fm.getSelectedFlight()->get_flightNumber() << " (Placeholder for David's code).\n";
+            
+            // --- Implementation of Remove Passenger Logic ---
+            int idToRemove;
+            std::cout << "Enter Passenger ID to remove: ";
+            
+            // Read ID and handle input failure
+            if (!(std::cin >> idToRemove)) {
+                std::cout << "Invalid ID entered. Returning to menu.\n";
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                break;
+            }
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear buffer
+            
+            if (fm.removePassenger(idToRemove)) {
+                std::cout << "Passenger with ID " << idToRemove << " successfully removed.\n";
+            } else {
+                std::cout << "Error: Passenger with ID " << idToRemove << " not found on flight.\n";
+            }
+            // --- End of Remove Passenger Logic ---
+            
         } else {
             std::cout << "Please select a flight first (Option 1).\n";
         }
