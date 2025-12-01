@@ -10,6 +10,9 @@ void displaySeatMap(const std::string& flightId, int seatMap[24][6]) {
     std::cout << std::setw(5) << "";
 
     for (int i = 0; i < 6; i++) {
+        if(i == 3){
+            std::cout << std::setw(3) << " "; // Aisle space
+        }
         std::cout << std::setw(3) << char(('A') + i);
     }
 
@@ -18,6 +21,9 @@ void displaySeatMap(const std::string& flightId, int seatMap[24][6]) {
     for (int row = 0; row < 24; ++row) {
         std::cout << std::setw(3) << row + 1 << " : ";
         for (int col = 0; col < 6; ++col) {
+            if (col == 3) {
+                std::cout << std::setw(3) << " "; // Aisle space
+            }
             if (seatMap[row][col] == 0) {
                 std::cout << std::setw(3) << "[ ]"; // Available seat
             } else {
