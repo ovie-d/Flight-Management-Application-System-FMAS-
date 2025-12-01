@@ -31,7 +31,7 @@ public:
     string get_seatandrow ()const;
     int get_ID() const;
     string get_PhoneNumber() const;
-
+    
 private:
     string Firstname;
     string Lastname;
