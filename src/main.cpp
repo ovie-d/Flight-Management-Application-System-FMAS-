@@ -2,10 +2,10 @@
 #include <limits> // For numeric_limits
 #include <string>
 #include "FlightManager.h"
-#include "Flight.h" // Assuming Flight.h is needed for Flight details
+#include "Flight.h" 
 #include "SeatMap.h" // Alex's SeatMap header
 
-// Global instance of FlightManager (since Singleton was removed)
+
 FlightManager fm;
 
 bool quit = false;
@@ -69,7 +69,7 @@ void select(){
         }
         break;
     case 2:
-        // Display Flight Seat Map (Alex's part)
+
         if (fm.getSelectedFlight()) {
             // Call the Flight member function to generate and display the map
             fm.getSelectedFlight()->print_seat_map();
@@ -134,7 +134,7 @@ void select(){
             
             // Call FlightManager to add the passenger
             fm.addPassenger(newPassenger);
-            // --- End of Add Passenger Logic ---
+
             
         } else {
             std::cout << "Please select a flight first (Option 1).\n";
@@ -144,7 +144,7 @@ void select(){
         // Remove an Existing Passenger (David's part, using fm.removePassenger)
         if (fm.getSelectedFlight()) {
             
-            // --- Implementation of Remove Passenger Logic ---
+
             int idToRemove;
             std::cout << "Enter Passenger ID to remove: ";
             
@@ -155,14 +155,14 @@ void select(){
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 break;
             }
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear buffer
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
             
             if (fm.removePassenger(idToRemove)) {
                 std::cout << "Passenger with ID " << idToRemove << " successfully removed.\n";
             } else {
                 std::cout << "Error: Passenger with ID " << idToRemove << " not found on flight.\n";
             }
-            // --- End of Remove Passenger Logic ---
+   
             
         } else {
             std::cout << "Please select a flight first (Option 1).\n";

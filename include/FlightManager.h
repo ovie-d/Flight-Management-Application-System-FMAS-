@@ -5,7 +5,6 @@
 #include <string>
 #include "FileManager.h"
 
-// Forward declarations for classes from other team members
 class Flight;
 class Passenger;
 
@@ -14,7 +13,7 @@ public:
     // Constructor
     FlightManager();
 
-    // Core application logic functions
+    // Initialization: Load data from files
     void initialize();
     void listFlights() const;
     bool selectFlight(const std::string& flightId);

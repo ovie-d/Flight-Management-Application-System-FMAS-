@@ -5,7 +5,7 @@
 #include <string>
 #include <fstream>
 
-// Forward declarations for classes handled by other team members
+
 class Flight;
 class Passenger;
 
