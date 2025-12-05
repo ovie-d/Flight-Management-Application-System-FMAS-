@@ -191,7 +191,7 @@ int main(){
     
     std::cout << "FMAS Version: 1.0" << std::endl;
     std::cout << "Term Project - Flight Management Application System" << std::endl;
-    std::cout << "Produced By : Alexander Gamble - Anes Khacha - David Onifeghara" << std::endl;
+    std::cout << "Produced By : Alexander Gamble - Anes Khacha - David Onofeghara" << std::endl;
     std::cout << "Year : 2025 " << std::endl;
     
     cont();
